@@ -39,6 +39,7 @@ const variants = {
 const navLinks = [
   { href: "#home", text: "Home" },
   { href: "#about", text: "About" },
+  { href: "#skills", text: "Skills" },
   { href: "#projects", text: "Projects" },
   { href: "#services", text: "Services" },
 ];
@@ -82,8 +83,8 @@ export default function Container(props: ContainerProps) {
   const { children, ...customMeta } = props;
   const router = useRouter();
   const meta = {
-    title: "Wendo",
-    description: `Full-stack website developer and TypeScript enthusiast.`,
+    title: "Sovandy",
+    description: `Full-stack / Software developer.`,
     image: "/assets/logo.webp",
     type: "website",
     ...customMeta,
@@ -163,7 +164,7 @@ export default function Container(props: ContainerProps) {
           </button>
         </div>
         <Link href="/">
-          <span className="text-lg font-semibold">wendo</span>
+          <span className="text-lg font-semibold">Sovandy</span>
         </Link>
 
         {/* Desktop menu */}

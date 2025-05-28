@@ -1,7 +1,9 @@
 import Container from "@/components/Container";
 import { useEffect, useRef, Suspense, useState } from "react";
+import { TabView, TabPanel } from "primereact/tabview";
 import styles from "@/styles/Home.module.css";
 import { Button } from "@/components/ui/button";
+//import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   ChevronRight,
   Code2,
@@ -26,43 +28,116 @@ import {
 } from "@/components/ui/carousel";
 import VanillaTilt from "vanilla-tilt";
 import { motion } from "framer-motion";
+import SkillCard from "@/components/SkillCard";
 
 const aboutStats = [
-  { label: "Years of experience", value: "3+" },
+  { label: "Years of experience", value: "2+" },
   { label: "Technologies mastered", value: "5+" },
-  { label: "Companies worked with", value: "15+" },
+  { label: "Companies worked with", value: "3+" },
+];
+
+//const [activeTab, setActiveTab] = useState("frontend");
+
+const tabs = [
+  { id: "frontend", label: "Frontend" },
+  { id: "backend", label: "Backend" },
+  { id: "mobile", label: "Mobile" },
+  { id: "database", label: "Database" },
+  { id: "cloud", label: "Cloud" },
+  { id: "devops", label: "DevOps" },
+];
+
+const frontendSkills = [
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Angular",
+  "Vue.js",
+  "NgPrime",
+  "DaisyUI",
+  "Tailwind CSS",
+  "Bootstrap",
+  "Laravel Blade",
+];
+
+const backendSkills = [
+  "Node.js",
+  "Express",
+  "NestJS",
+  "Laravel",
+  "PHP",
+  "ASP.NET Core",
+  "Spring Boot",
+  "REST APIs",
+  "Microservices",
+];
+
+const mobileSkills = ["Flutter"];
+
+const databaseSkills = [
+  "Microsoft SQL Server",
+  "MySQL",
+  "PostgreSQL",
+  "MongoDB",
+  "Redis",
+  "Prisma",
+  "TypeORM",
+];
+
+const cloudSkills = [
+  "Heroku",
+  "Netlify",
+  "Vercel",
+  "Linode",
+  "Digital Ocean",
+  "Azure",
+];
+
+const devopsSkills = [
+  "Docker",
+  "CI/CD",
+  "GitHub Actions",
+  "GitLab CI",
+  "Jenkins",
+  "Nginx",
 ];
 
 const projects = [
   {
-    title: "Unqueue",
-    description: "E-commerce platform for selling digital products",
-    image: "/assets/unqueue.webm",
-    href: "https://unqueue.shop/",
+    title: "TRC Service",
+    description:
+      "Web Application Portal For Request Applying For Permit, Certificate or Other Licenses From Telecommunication Regulator of Cambodia.",
+    image: "/assets/trc_service.png",
+    href: "https://service.trc.gov.kh/#/",
   },
   {
-    title: "InfiniteVPS",
-    description: "High performance VPS hosting solution",
-    image: "/assets/infinitevps.webm",
-    href: "#",
+    title: "Ministry Culture and Fine Arts - Human Resource",
+    description:
+      "A website/web application for store/download juridical document and posting blogs.",
+    image: "/assets/mcfa.jpg",
+    href: "",
   },
   {
-    title: "TranslateBot",
-    description: "Powerful Multilingual Translation Bot for Discord",
-    image: "/assets/translate_bot.webm",
-    href: "https://translatebot.app/",
+    title: "National Authority For Sambor Prei Kuk - Navigation Management",
+    description:
+      "Web Application for managing naviagation people request document",
+    image: "/assets/naspk.png",
+    href: "",
   },
   {
-    title: "Wrona",
-    description: "Robotics-focused technology company",
-    image: "/assets/wrona.jpeg",
-    href: "https://www.wrona.com/",
+    title:
+      "National Authority For Sambor Prei Kuk - Land Use Information Management",
+    description: "Web Application for managing land use request document",
+    image: "/assets/lui_naspk.png",
+    href: "",
   },
   {
-    title: "This website",
-    description: "My personal website",
-    image: "/assets/portfolio.webm",
-    href: "https://github.com/wendoj/portfolio",
+    title: "STOP DOMESTIC VIOLENCE",
+    description: "A website/web app for manage and report domestic violence.",
+    image: "/assets/sdv.png",
+    href: "",
   },
 ];
 
@@ -74,9 +149,9 @@ const services = [
     icon: Code2,
   },
   {
-    service: "UX Design",
+    service: "Devops",
     description:
-      "Building intuitive, user-centric designs that drive engagement and conversion.",
+      "Deploying finish products to cloud/vps server using CI/CD pipeline.",
     icon: Frame,
   },
   {
@@ -176,7 +251,6 @@ export default function Home() {
     <Container>
       <div ref={refScrollContainer}>
         <Gradient />
-
         {/* Intro */}
         <section
           id="home"
@@ -206,7 +280,7 @@ export default function Home() {
                   <br />
                 </span>
                 <span className="clash-grotesk text-gradient text-6xl 2xl:text-8xl">
-                  WendoJ.
+                  Sovandy Khgney.
                 </span>
               </h1>
               <p
@@ -225,7 +299,7 @@ export default function Home() {
               data-scroll-speed=".06"
               className="flex flex-row items-center space-x-1.5 pt-6"
             >
-              <Link href="mailto:wendoj@proton.me" passHref>
+              <Link target="_blank" href="https://t.me/SovandyKH" passHref>
                 <Button>
                   Get in touch <ChevronRight className="ml-1 h-4 w-4" />
                 </Button>
@@ -259,7 +333,6 @@ export default function Home() {
             </Suspense>
           </div>
         </section>
-
         {/* About */}
         <section id="about" data-scroll-section>
           <div
@@ -269,19 +342,16 @@ export default function Home() {
             className="my-14 flex max-w-6xl flex-col justify-start space-y-10"
           >
             <h2 className="py-16  pb-2 text-3xl font-light leading-normal tracking-tighter text-foreground xl:text-[40px]">
-              I&apos;m an experienced full-stack developer proficient in{" "}
-              <Link
-                href="https://create.t3.gg/"
-                target="_blank"
-                className="underline"
-              >
-                TypeScript, Tailwind, and Next.js
-              </Link>{" "}
-              since 2021. My experience spans from startups to mid-sized
-              companies, where I&apos;ve been instrumental in the entire product
-              design process; from ideation and wireframing, through
-              prototyping, to the delivery of the final product, all while
-              efficiently collaborating with cross-functional teams.
+              I&apos;m{" "}
+              <span className="clash-grotesk text-gradient font-bold">
+                Khgney Sovandy
+              </span>
+              , a passionate Full Stack Web Developer by heart. I enjoy building
+              modern web applications that solve real-world problems and enhance
+              user experiences. With a strong foundation in both frontend and
+              backend development, I specialize in frameworks like Angular, and
+              React on the frontend, and ASP.NET Core, NestJS, and Spring Boot
+              on the backend.
             </h2>
             <div className="grid grid-cols-2 gap-8 xl:grid-cols-3">
               {aboutStats.map((stat) => (
@@ -297,6 +367,115 @@ export default function Home() {
                   </span>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" data-scroll-section>
+          <div data-scroll data-scroll-speed=".4">
+            <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
+              🛠️ Skills
+            </span>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight tracking-tighter xl:text-6xl">
+              Technologies I work with.
+            </h2>
+            <p className="mt-4 text-base tracking-tight text-muted-foreground xl:text-lg">
+              Here are the technologies and tools I'm working/learning in.
+            </p>
+
+            <div className="mt-10">
+              <TabView>
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-desktop" />
+                      <span>Frontend</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {frontendSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-server" />
+                      <span>Backend</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {backendSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-mobile" />
+                      <span>Mobile</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {mobileSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-database" />
+                      <span>Database</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {databaseSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-cloud" />
+                      <span>Cloud</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {cloudSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+
+                <TabPanel
+                  header={
+                    <div className="flex items-center gap-2">
+                      <i className="pi pi-code" />
+                      <span>DevOps</span>
+                    </div>
+                  }
+                >
+                  <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                    {devopsSkills.map((skill) => (
+                      <SkillCard key={skill} skill={skill} />
+                    ))}
+                  </div>
+                </TabPanel>
+              </TabView>
             </div>
           </div>
         </section>
@@ -318,7 +497,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div data-scroll data-scroll-speed=".4" className="my-64">
+          <div data-scroll data-scroll-speed=".4">
             <span className="text-gradient clash-grotesk text-sm font-semibold tracking-tighter">
               ✨ Projects
             </span>
@@ -330,64 +509,119 @@ export default function Home() {
               large-scale web applications. Here are some of my favorites:
             </p>
 
-            {/* Carousel */}
-            <div className="mt-14">
-              <Carousel setApi={setCarouselApi} className="w-full">
-                <CarouselContent>
+            {/* Enhanced Card Grid with Auto-play */}
+            <div className="mt-1">
+              <Carousel
+                setApi={setCarouselApi}
+                className="w-full"
+                opts={{
+                  align: "start",
+                  loop: true,
+                  duration: 30, // Slower auto-scroll
+                }}
+                // plugins={[
+                //   {
+                //     id: "auto-scroll",
+                //     options: {
+                //       active: true,
+                //       breakpoints: {
+                //         "(min-width: 768px)": { active: true }, // Auto-scroll only on desktop
+                //       },
+                //     },
+                //   },
+                // ]}
+              >
+                <CarouselContent className="-ml-4">
                   {projects.map((project) => (
-                    <CarouselItem key={project.title} className="md:basis-1/2">
-                      <Card id="tilt">
-                        <CardHeader className="p-0">
-                          <Link href={project.href} target="_blank" passHref>
-                            {project.image.endsWith(".webm") ? (
-                              <video
-                                src={project.image}
-                                autoPlay
-                                loop
-                                muted
-                                className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                              />
-                            ) : (
-                              <Image
-                                src={project.image}
-                                alt={project.title}
-                                width={600}
-                                height={300}
-                                quality={100}
-                                className="aspect-video h-full w-full rounded-t-md bg-primary object-cover"
-                              />
-                            )}
-                          </Link>
-                        </CardHeader>
-                        <CardContent className="absolute bottom-0 w-full bg-background/50 backdrop-blur">
-                          <CardTitle className="border-t border-white/5 p-4 text-base font-normal tracking-tighter">
-                            {project.description}
-                          </CardTitle>
-                        </CardContent>
-                      </Card>
+                    <CarouselItem
+                      key={project.title}
+                      className="pl-4 md:basis-1/2 lg:basis-2/3"
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 300,
+                          damping: 10,
+                        }}
+                        className="h-full"
+                      >
+                        <Card
+                          id="tilt"
+                          className="hover:shadow-3xl group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-2xl transition-all duration-300 hover:border-white/20"
+                        >
+                          <CardHeader className="relative p-0">
+                            <Link href={project.href} target="_blank" passHref>
+                              <div className="relative aspect-[16/9] w-full overflow-hidden">
+                                {project.image.endsWith(".webm") ? (
+                                  <video
+                                    src={project.image}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                  />
+                                ) : (
+                                  <Image
+                                    src={project.image}
+                                    alt={project.title}
+                                    width={1200}
+                                    height={675}
+                                    quality={100}
+                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                  />
+                                )}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                              </div>
+                            </Link>
+                          </CardHeader>
+                          <CardContent className="absolute inset-0 flex flex-col justify-end p-6 text-white transition-all duration-500">
+                            <div className="translate-y-10 transform opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                              <CardTitle className="text-2xl font-bold">
+                                {project.title}
+                              </CardTitle>
+                              <p className="mt-2 text-lg text-white/90">
+                                {project.description}
+                              </p>
+                              {project.href !== "" && (
+                                <Button size="lg" className="mt-4" asChild>
+                                  <Link href={project.href} target="_blank">
+                                    View Project{" "}
+                                    <ChevronRight className="ml-1 h-4 w-4" />
+                                  </Link>
+                                </Button>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="left-6 hidden h-14 w-14 border-none bg-white/20 backdrop-blur-md hover:bg-white/30 md:flex" />
+                <CarouselNext className="right-6 hidden h-14 w-14 border-none bg-white/20 backdrop-blur-md hover:bg-white/30 md:flex" />
               </Carousel>
-              <div className="py-2 text-center text-sm text-muted-foreground">
-                <span className="font-semibold">
-                  {current} / {count}
-                </span>{" "}
-                projects
+              <div className="mt-6 flex items-center justify-center gap-2">
+                {Array.from({ length: count }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => carouselApi?.scrollTo(index)}
+                    className={`h-2.5 w-2.5 rounded-full transition-all ${current === index + 1 ? "w-8 bg-primary" : "bg-white/20"}`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </section>
-
         {/* Services */}
         <section id="services" data-scroll-section>
           <div
             data-scroll
             data-scroll-speed=".4"
             data-scroll-position="top"
-            className="my-24 flex flex-col justify-start space-y-10"
+            className="flex flex-col justify-start space-y-10"
           >
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -429,9 +663,8 @@ export default function Home() {
             </motion.div>
           </div>
         </section>
-
         {/* Contact */}
-        <section id="contact" data-scroll-section className="my-64">
+        <section id="contact" data-scroll-section className="mb-64">
           <div
             data-scroll
             data-scroll-speed=".4"
@@ -446,8 +679,13 @@ export default function Home() {
               I&apos;m currently available for freelance work and open to
               discussing new projects.
             </p>
-            <Link href="mailto:wendoj@proton.me" passHref>
+            <Link target="_blank" href="https://t.me/SovandyKH" passHref>
               <Button className="mt-6">Get in touch</Button>
+            </Link>
+            <Link target="_blank" href="/files/Sovandy_Khgney.pdf" passHref>
+              <Button variant="outline" className="mt-6">
+                Download Portfolio
+              </Button>
             </Link>
           </div>
         </section>

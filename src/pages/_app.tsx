@@ -5,6 +5,10 @@ import "@/styles/locomotive-scroll.css";
 
 import { DM_Sans } from "next/font/google";
 
+import "primereact/resources/themes/lara-light-indigo/theme.css"; // theme
+import "primereact/resources/primereact.min.css"; // core css
+import "primeicons/primeicons.css";
+
 const dmSans = DM_Sans({
   display: "swap",
   subsets: ["latin"],

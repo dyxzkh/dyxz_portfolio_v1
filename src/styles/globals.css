@@ -55,7 +55,7 @@
     @apply antialiased;
   }
   body {
-    @apply bg-background text-foreground cursor-wait;
+    @apply cursor-wait bg-background text-foreground;
   }
   section {
     scroll-margin-top: 60px;
@@ -107,4 +107,39 @@
   .animate-blink {
     animation: blink 1s infinite;
   }
+}
+
+/* styles/globals.css */
+.p-tabview .p-tabview-nav {
+  background: transparent;
+  border: none;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  margin-right: 0.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: hsl(var(--primary));
+  border-color: hsl(var(--primary));
+  color: white;
+}
+
+.p-tabview
+  .p-tabview-nav
+  li:not(.p-highlight):not(.p-disabled):hover
+  .p-tabview-nav-link {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.p-tabview .p-tabview-panels {
+  background: transparent;
+  padding: 0;
+  border: none;
 }
