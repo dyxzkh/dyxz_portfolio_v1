@@ -46,7 +46,7 @@ const getSkillIcon = (skill: string) => {
     "React Native": <i className="pi pi-mobile text-[#61DAFB]" />,
   };
 
-  return iconMap[skill] || <i className="pi pi-code" />; // Default icon
+  return iconMap[skill] ?? <i className="pi pi-code" />; // Default icon
 };
 
 interface SkillCardProps {

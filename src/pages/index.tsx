@@ -36,16 +36,14 @@ const aboutStats = [
   { label: "Companies worked with", value: "3+" },
 ];
 
-//const [activeTab, setActiveTab] = useState("frontend");
-
-const tabs = [
-  { id: "frontend", label: "Frontend" },
-  { id: "backend", label: "Backend" },
-  { id: "mobile", label: "Mobile" },
-  { id: "database", label: "Database" },
-  { id: "cloud", label: "Cloud" },
-  { id: "devops", label: "DevOps" },
-];
+// const tabs = [
+//   { id: "frontend", label: "Frontend" },
+//   { id: "backend", label: "Backend" },
+//   { id: "mobile", label: "Mobile" },
+//   { id: "database", label: "Database" },
+//   { id: "cloud", label: "Cloud" },
+//   { id: "devops", label: "DevOps" },
+// ];
 
 const frontendSkills = [
   "HTML",
@@ -381,7 +379,7 @@ export default function Home() {
               Technologies I work with.
             </h2>
             <p className="mt-4 text-base tracking-tight text-muted-foreground xl:text-lg">
-              Here are the technologies and tools I'm working/learning in.
+              Here are the technologies and tools I&apos;m working/learning in.
             </p>
 
             <div className="mt-10">
