@@ -29,12 +29,12 @@ export default function Footer() {
           {/* <p className="text-xs text-muted-foreground">
             Made with ❤️ by{" "}
             <Link
-              href="https://github.com/wendoj"
+              href="https://github.com/sovandy"
               target="_blank"
               passHref
               className="text-foreground transition hover:text-primary"
             >
-              wendoj
+              sovandy
             </Link>
           </p>
           <hr className="hidden h-6 border-l border-muted md:flex" /> */}

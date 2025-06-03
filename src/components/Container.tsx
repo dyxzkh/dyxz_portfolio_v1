@@ -121,11 +121,11 @@ export default function Container(props: ContainerProps) {
         <meta content={meta.description} name="description" />
         {/* <meta
           property="og:url"
-          content={`https://www.wendoj.codes${router.asPath}`}
+          content={`https://www.sovandy.codes${router.asPath}`}
         /> */}
         {/* <link
           rel="canonical"
-          href={`https://www.wendoj.codes${router.asPath}`}
+          href={`https://www.sovandy.codes${router.asPath}`}
         /> */}
         <meta property="og:type" content={meta.type} />
         <meta property="og:site_name" content="Sovandy" />
